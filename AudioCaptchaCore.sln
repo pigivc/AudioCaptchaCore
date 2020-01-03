@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioCaptchaCore", "AudioCaptchaCore\AudioCaptchaCore.csproj", "{D1E5928A-DCCA-4B3D-987A-6C8AF3910FAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pigi.Captcha", "Pigi.Captcha\Pigi.Captcha.csproj", "{8211958D-59F8-4C9B-96DF-A2E51FC869F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TtsExec", "TtsExec\TtsExec.csproj", "{99AC426E-1E70-4936-A90B-AED449EF8099}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1E5928A-DCCA-4B3D-987A-6C8AF3910FAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1E5928A-DCCA-4B3D-987A-6C8AF3910FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1E5928A-DCCA-4B3D-987A-6C8AF3910FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1E5928A-DCCA-4B3D-987A-6C8AF3910FAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8211958D-59F8-4C9B-96DF-A2E51FC869F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8211958D-59F8-4C9B-96DF-A2E51FC869F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8211958D-59F8-4C9B-96DF-A2E51FC869F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8211958D-59F8-4C9B-96DF-A2E51FC869F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99AC426E-1E70-4936-A90B-AED449EF8099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99AC426E-1E70-4936-A90B-AED449EF8099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99AC426E-1E70-4936-A90B-AED449EF8099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99AC426E-1E70-4936-A90B-AED449EF8099}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2583020D-FDEA-4994-AAE4-93DCC8E27B3C}
+	EndGlobalSection
+EndGlobal
