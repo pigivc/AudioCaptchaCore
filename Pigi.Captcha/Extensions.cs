@@ -120,13 +120,13 @@ GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
             if(settings.ShowInput)
             sb.Append("<input id=\""+settings.Id+"\"  name=\""+settings.Id+"\" type=\"text\" class=\"form-control\" style=\"float:left;width:"+settings.PicWidth+"px\"/>");
             sb.Append("<div  style=\"display: flex; float:left; align-items:center\">");
-            sb.Append("<img id=\"img"+settings.Id+ "\" src='"+urlHelper.Content("/captcha.ashx?id=" + settings.Id+"")+"' />");
+            sb.Append("<img id=\"img"+settings.Id+ "\" src='"+urlHelper.Content("~/captcha.ashx?id=" + settings.Id+"")+"' />");
             sb.Append("<table id=\"capTbl\" style=\"color: black; margin-left:5px\">");
             if (settings.EnableAudio)
-                sb.Append("<tr><td><a class=\"lol glyphicon glyphicon-volume-up\" title=\"Speak!\" style=\"background-image:url('"+ urlHelper.Content("/static.ashx?id=audio") + "');display:block;height:16px;width:16px\" "+
+                sb.Append("<tr><td><a class=\"lol glyphicon glyphicon-volume-up\" title=\"Speak!\" style=\"background-image:url('"+ urlHelper.Content("~/static.ashx?id=audio") + "');display:block;height:16px;width:16px\" "+
                     " onclick=\"play('" + settings.Id+"')\"></a></td></tr>");
             
-            sb.Append("<tr><td><a class=\"lol glyphicon glyphicon-refresh\" title=\"Refresh\" style=\"background-image:url('/static.ashx?id=refresh');display:block;height:16px;width:16px\" " +
+            sb.Append("<tr><td><a class=\"lol glyphicon glyphicon-refresh\" title=\"Refresh\" style=\"background-image:url('" + urlHelper.Content("~/static.ashx?id=refresh") + "');display:block;height:16px;width:16px\" " +
                 "onclick=\"refresh('" + settings.Id+"')\"></a></td></tr>");
             sb.Append("</table></div>");
 
@@ -138,14 +138,14 @@ GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
 
                 sb.Append("<script> var audioDic = {};function refresh(id) {var aud = audioDic[id];if (aud) { aud.pause(); aud.currentTime = 0;}" +
             "audioDic[id] = undefined;" +
-        "$(\"#img\"+id).attr('src', '"+urlHelper.Content("/captcha.ashx")+"?id='+id+'&'+Math.random()) }");
+        "$(\"#img\"+id).attr('src', '"+urlHelper.Content("~/captcha.ashx")+"?id='+id+'&'+Math.random()) }");
                 //if(settings.EnableAudio)
                 //sb.Append("var play = function(id) {var aud = audioDic[id];if (aud == undefined)" +
                 //        "aud = new Audio('/sayit.ashx?id=' + id);"+
                 //    "aud.pause();aud.currentTime = 0; aud.play(); audioDic[id] = aud;}");
 
                 sb.Append("var play = function(id) {var aud = audioDic[id];if (aud == undefined)" +
-                       "aud = new Audio('"+ urlHelper.Content("/sayit.ashx") + "'+'?id=' + id);" +
+                       "aud = new Audio('"+ urlHelper.Content("~/sayit.ashx") + "'+'?id=' + id);" +
                    "aud.pause();aud.currentTime = 0; aud.play(); audioDic[id] = aud;}");
                 sb.Append("</script>");
             }
