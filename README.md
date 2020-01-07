@@ -26,4 +26,4 @@ Sample project included!
 
 <h1>Live Demo</h1>
 
-<a href="#" onclick='javascript:window.open("http://captcha.pigivc.ir");return false;' >Demo</a>
+<a href="http://captcha.pigivc.ir" target="_blank");return false;' >Demo</a>
