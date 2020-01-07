@@ -14,6 +14,10 @@ namespace TtsExec
         {
             var data = CreateAudio(args[0]).Result;
             Console.Out.Write(Convert.ToBase64String(data));
+            if(Console.Error!= null)
+            {
+                Console.Error.Write(Console.Out);
+            }
         }
 
         public async static Task<byte[]> CreateAudio(string text)

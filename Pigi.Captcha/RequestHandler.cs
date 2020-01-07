@@ -31,10 +31,7 @@ namespace Pigi.Captcha
                 await new StaticeResources().ProcessRequestAsync(context);
 
             }
-            await context.Response.WriteAsync
-            ("<h2>This handler is written for processing files with .report extension<h2>");
-
-            //more logic follows...
+            await _next(context);
         }
     }
 }

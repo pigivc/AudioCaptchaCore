@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,8 +32,12 @@ namespace AudioCaptchaCore
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            var rootDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.
+GetExecutingAssembly().CodeBase).Replace(@"file:\", string.Empty);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddDataProtection()
+                .SetApplicationName("fow-customer-portal")
+                .PersistKeysToFileSystem(new System.IO.DirectoryInfo(rootDir + @"/dpkeys"));
 
             services.AddPigiCaptcha();
             

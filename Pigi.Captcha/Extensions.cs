@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
+using Microsoft.Extensions.Logging;
 using NAudio.Lame;
 using NAudio.Wave;
 using System;
@@ -18,13 +19,18 @@ namespace Pigi.Captcha
 
         internal static async Task<byte[]> CreateAudio(this string textToSpeech, bool doCompress = true)
         {
+            //var logger = (ILogger<sayit>)AppContext.Current.RequestServices.GetService(typeof(ILogger<sayit>));
             var data = string.Empty;
-            var rootDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.
-GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
-            await Task.Run(() =>
+            
+            try
             {
-                var start =
-                    new System.Diagnostics.ProcessStartInfo()
+                var rootDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.
+GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
+                await Task.Run(() =>
+                {
+                    var process = new System.Diagnostics.Process();
+
+                    process.StartInfo = new System.Diagnostics.ProcessStartInfo()
                     {
                         FileName = rootDir + @"\ttsExec.exe",  // CHUPA MICROSOFT 02-10-2019 23:45                    
                         LoadUserProfile = false,
@@ -34,35 +40,47 @@ GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
                         RedirectStandardOutput = true,
                         WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden
                     };
+                    process.Start();
+                    while (!process.StandardOutput.EndOfStream)
+                    {
+                        data = process.StandardOutput.ReadLine();
+                    }
 
-                var p = System.Diagnostics.Process.Start(start);
-                
-                while (!p.StandardOutput.EndOfStream)
-                {
-                    data = p.StandardOutput.ReadLine();
-                }
-                
-                p.WaitForExit();
-            });
+                    process.WaitForExit();
+                });
+            }
+            catch (Exception exc)
+            {
+                //logger.LogError(exc.Message, exc);
+                throw;
+            }
 
-            var bytes = Convert.FromBase64CharArray(data.ToCharArray(),0, data.ToCharArray().Length);
+            var bytes = Convert.FromBase64String(data);
 
-            if(doCompress)
-                return bytes.CompressWav().Result;
+            if (doCompress)
+                return ConvertToMp3(bytes);
             return bytes;
+        }
 
+        private static byte[] ConvertToMp3(byte[] wav)
+        {
+            using (var rdr = new WaveFileReader(new MemoryStream(wav)))
+            using(var outMs = new MemoryStream())
+            using (var wtr = new LameMP3FileWriter(outMs, rdr.WaveFormat, 24))
+            {
+                rdr.CopyTo(wtr);
+                return outMs.ToArray();
+            }
         }
 
         private static Task<byte[]> CompressWav(this byte[] wav)
         {
             var task = Task.Run(() =>
             {
-
                 try
                 {
                     using (var ms = new MemoryStream(wav))
                     {
-
                         using (var reader = new WaveFileReader(ms))
                         {
                             var newFormat = new WaveFormat(8000, 16, 1);
@@ -77,18 +95,13 @@ GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
                                         
                                         return outms.ToArray();
                                     }
-                                    //WaveFileWriter.WriteWavFileToStream(outms, conversionStream);
-                                    //return outms.ToArray();
                                 }
-
-
                             }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    
                     throw;
                 }
 
@@ -109,9 +122,7 @@ GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
             AppContext.Current.Session.Set(_captchaPrefix + settings.Id, settings);
 
             var urlHelperFactory = (IUrlHelperFactory)htmlHelper.ViewContext.HttpContext.RequestServices.GetService(typeof(IUrlHelperFactory));
-            //var actionContext = ((IActionContextAccessor)htmlHelper.ViewContext.HttpContext.RequestServices.GetService(typeof(IActionContextAccessor))).ActionContext;
             var urlHelper = urlHelperFactory.GetUrlHelper(htmlHelper.ViewContext);
-            //htmlHelper.ViewContext.RequestContext.HttpContext.Session[_captchaPrefix + settings.Id] = settings;
 
             StringBuilder sb = new StringBuilder();
             if(cs == null)
@@ -132,17 +143,9 @@ GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
 
             if (cs == null)
             {
-        //        sb.Append("<script> var audioDic = {};function refresh(id) {var aud = audioDic[id];if (aud) { aud.pause(); aud.currentTime = 0;}" +
-        //    "audioDic[id] = undefined;" +
-        //"$(\"#img\"+id).attr('src', '/captcha.ashx?id='+id+'&'+Math.random()) }");
-
                 sb.Append("<script> var audioDic = {};function refresh(id) {var aud = audioDic[id];if (aud) { aud.pause(); aud.currentTime = 0;}" +
             "audioDic[id] = undefined;" +
         "$(\"#img\"+id).attr('src', '"+urlHelper.Content("~/captcha.ashx")+"?id='+id+'&'+Math.random()) }");
-                //if(settings.EnableAudio)
-                //sb.Append("var play = function(id) {var aud = audioDic[id];if (aud == undefined)" +
-                //        "aud = new Audio('/sayit.ashx?id=' + id);"+
-                //    "aud.pause();aud.currentTime = 0; aud.play(); audioDic[id] = aud;}");
 
                 sb.Append("var play = function(id) {var aud = audioDic[id];if (aud == undefined)" +
                        "aud = new Audio('"+ urlHelper.Content("~/sayit.ashx") + "'+'?id=' + id);" +
