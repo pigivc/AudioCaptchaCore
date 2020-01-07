@@ -23,3 +23,7 @@ Sample project included!
 <pre>@Html.Captcha(new CaptchaSettings { Id = "c1", TextLength = 5 })</pre>
 
 7. You can configure other settings.
+
+<h1>Live Demo</h1>
+
+<a href="http://captcha.pigivc.ir" >Demo</a>
