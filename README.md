@@ -21,7 +21,9 @@ Sample project included!
 6. Sample use in a view.cshtm:
 
 <pre>@Html.Captcha(new CaptchaSettings { Id = "c1", TextLength = 5 })</pre>
+or
 
+<pre><captcha for-id="c2" for-textLength="9" for-showInput="false" for-textStyle="TextStyle.Numeric"></captcha></pre>
 7. You can configure other settings.
 
 <h1>Live Demo</h1>
