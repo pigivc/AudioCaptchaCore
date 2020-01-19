@@ -23,7 +23,7 @@ Sample project included!
 <pre>@Html.Captcha(new CaptchaSettings { Id = "c1", TextLength = 5 })</pre>
 or
 
-<pre><captcha for-id="c2" for-textLength="9" for-showInput="false" for-textStyle="TextStyle.Numeric"></captcha></pre>
+<pre>&lt;captcha for-id="c2" for-textLength="9" for-showInput="false" for-textStyle="TextStyle.Numeric"&gt;&lt;/captcha&gt;</pre>
 7. You can configure other settings.
 
 <h1>Live Demo</h1>
