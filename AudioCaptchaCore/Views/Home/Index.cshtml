@@ -9,8 +9,15 @@
 </div>
 <form method="post">
     <div class="row">
+        <label>Htmlhelper Captcha</label>
         @Html.Captcha(new CaptchaSettings { Id = "c1", TextLength = 5 })
-        
+
+    </div>
+    <hr />
+    <label >Taghelper Captcha</label>
+    <div class="row">
+        <captcha for-id="c2" for-textLength="9" for-showInput="false" for-textStyle="TextStyle.Numeric"></captcha>
+
     </div>
     <button type="submit" class="btn btn-info">Check captcha</button>
 </form>

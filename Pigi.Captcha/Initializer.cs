@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Pigi.Captcha
             });
 
             services.AddHttpContextAccessor();
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
         }
 
         public static void ConfigPigiCaptcha(this IApplicationBuilder app)
