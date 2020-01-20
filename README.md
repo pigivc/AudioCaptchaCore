@@ -10,7 +10,7 @@ Sample project included!
 
 1. Add a <pre>Pigi.Captcha.dll</pre> reference to your project.
 or Install via Nuget Package Manager:
-<pre>Install-Package Pigi.Captcha -Version 1.0.1</pre>
+<pre>Install-Package Pigi.Captcha -Version 1.0.2</pre>
 
 2. In startup.cs file or your asp.net core project add <pre>@using Pigi.Captcha</pre> at the top.
 
