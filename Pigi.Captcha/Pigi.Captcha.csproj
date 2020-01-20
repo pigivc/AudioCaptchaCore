@@ -2,12 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <Company>Pigivc</Company>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="audio.png" />
     <None Remove="Properties\refresh.png" />
     <None Remove="refresh.png" />
+    <None Remove="TtsExec.exe" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,6 +17,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="refresh.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TtsExec.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
