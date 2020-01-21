@@ -11,6 +11,7 @@ namespace Pigi.Captcha
                                       (this IApplicationBuilder builder)
         {
             return builder.UseMiddleware<RequestHandler>();
+            //return builder.UseMvcWithDefaultRoute();
         }
 
     }

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Pigi.Captcha;
 
 namespace AudioCaptchaCore
@@ -34,17 +35,17 @@ namespace AudioCaptchaCore
 
             var rootDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.
 GetExecutingAssembly().CodeBase).Replace(@"file:\", string.Empty);
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddDataProtection()
                 .SetApplicationName("fow-customer-portal")
                 .PersistKeysToFileSystem(new System.IO.DirectoryInfo(rootDir + @"/dpkeys"));
 
             services.AddPigiCaptcha();
-            
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -55,17 +56,22 @@ GetExecutingAssembly().CodeBase).Replace(@"file:\", string.Empty);
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.ConfigPigiCaptcha();
+
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
             app.UseSession();
 
-            app.ConfigPigiCaptcha();
-            app.UseMvc(routes =>
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllers();
+            });
+            app.UseEndpoints(endpoints =>
+            {
+                //endpoints.MapHub<ChatHub>("/chat");
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

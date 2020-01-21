@@ -26,6 +26,7 @@ namespace Pigi.Captcha
 
         public static void ConfigPigiCaptcha(this IApplicationBuilder app)
         {
+            app.UseSession();
             Pigi.Captcha.AppContext.Configure(app.ApplicationServices
                       .GetRequiredService<IHttpContextAccessor>());
 

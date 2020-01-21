@@ -13,7 +13,7 @@ namespace Pigi.Captcha
 
         // Make a captcha image for the text.
         public Bitmap MakeCaptchaImge(string txt,
-            int min_size, int max_size, int wid, int hgt,CaptchaStyle cStyle = CaptchaStyle.TextWithLineAndCircles)
+            int min_size, int max_size, int wid, int hgt, CaptchaStyle cStyle = CaptchaStyle.TextWithLineAndCircles)
         {
             // Make the bitmap and associated Graphics object.
             Bitmap bm = new Bitmap(wid, hgt);
@@ -22,7 +22,7 @@ namespace Pigi.Captcha
                 gr.SmoothingMode = SmoothingMode.HighQuality;
                 gr.Clear(Color.LightYellow);
 
-                
+
 
                 var r = new Random();
 
@@ -49,7 +49,7 @@ namespace Pigi.Captcha
                 }
 
 
-                
+
 
                 if (cStyle == CaptchaStyle.TextWithLineAndCircles || cStyle == CaptchaStyle.TextWithLine)
                 {
@@ -67,6 +67,7 @@ namespace Pigi.Captcha
             }
 
             return bm;
+
         }
 
         // Draw a deformed character at this position.

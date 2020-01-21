@@ -31,7 +31,7 @@ namespace Pigi.Captcha
                 await new StaticeResources().ProcessRequestAsync(context);
 
             }
-            await _next(context);
+            //await _next(context);
         }
     }
 }

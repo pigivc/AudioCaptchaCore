@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.IO;
 using System.Threading.Tasks;
 using System.Web;
+
 
 namespace Pigi.Captcha
 {
@@ -13,10 +15,26 @@ namespace Pigi.Captcha
         public async Task ProcessRequestAsync(HttpContext context)
         {
             var key = Extensions._captchaPrefix + context.Request.Query["id"];
-            var bmCaptcha = await CaptchaManager.GenerateCaptchaImage(key);
-            bmCaptcha.Save(context.Response.Body, System.Drawing.Imaging.ImageFormat.Png);
-            context.Response.ContentType = "image/png";
-            //context.Response.Write("Hello World");
+
+            Stream originalBody = context.Response.Body;
+
+            try
+            {
+                using (var image = await CaptchaManager.GenerateCaptchaImage(key))
+                using (var memStream = new MemoryStream())
+                {
+                    image.Save(memStream, System.Drawing.Imaging.ImageFormat.Png);
+                    context.Response.Body = memStream;
+
+                    memStream.Position = 0;
+                    await memStream.CopyToAsync(originalBody);
+                }
+
+            }
+            finally
+            {
+                context.Response.Body = originalBody;
+            }
         }
 
         public bool IsReusable
