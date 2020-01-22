@@ -22,32 +22,9 @@ namespace Pigi.Captcha
             if (cSetting.EnableAudio)
                 bytes = await CaptchaManager.GenerateCurrentCaptachAudio(key);
             context.Response.Clear();
-            //context.Response.ContentType = "audio/mp3";
+            context.Response.ContentType = "audio/mp3";
             
-            //await context.Response.Body.WriteAsync(bytes, 0, bytes.Length);
-
-
-            Stream originalBody = context.Response.Body;
-
-            try
-            {
-                
-                using (var memStream = new MemoryStream(bytes))
-                {
-                    //image.Save(memStream, System.Drawing.Imaging.ImageFormat.Png);
-                    context.Response.Body = memStream;
-
-                    memStream.Position = 0;
-                    await memStream.CopyToAsync(originalBody);
-                }
-
-            }
-            finally
-            {
-                context.Response.Body = originalBody;
-                context.Response.ContentType = "audio/mp3";
-
-            }
+            await context.Response.Body.WriteAsync(bytes, 0, bytes.Length);
 
         }
 

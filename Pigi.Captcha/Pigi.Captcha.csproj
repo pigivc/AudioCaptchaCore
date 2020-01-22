@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <Company>Pigivc</Company>
-    <Version>1.0.3</Version>
+    <Version>1.0.7</Version>
     <Description>Easy to use Audio Captcha for Asp.net MVC Core</Description>
     <RepositoryUrl>https://github.com/pigivc/AudioCaptchaCore</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
@@ -13,27 +13,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="audio.png" />
     <None Remove="Properties\refresh.png" />
-    <None Remove="refresh.png" />
     <None Remove="TtsExec.exe" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="audio.png">
+    <EmbeddedResource Include="TtsExec.exe" copyToOutput="true">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <IncludeInPackage>true</IncludeInPackage>
+      <BuildAction>Content</BuildAction>
     </EmbeddedResource>
-    <EmbeddedResource Include="refresh.png">
+    <EmbeddedResource Include="libmp3lame.32.dll" copyToOutput="true">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <IncludeInPackage>true</IncludeInPackage>
+      <BuildAction>Content</BuildAction>
     </EmbeddedResource>
-    <EmbeddedResource Include="TtsExec.exe">
+    <EmbeddedResource Include="libmp3lame.64.dll" copyToOutput="true">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="libmp3lame.32.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="libmp3lame.64.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <IncludeInPackage>true</IncludeInPackage>
+      <BuildAction>Content</BuildAction>
     </EmbeddedResource>
   </ItemGroup>
 
@@ -61,43 +59,6 @@
     <Content Include="readme.txt">
       <Pack>true</Pack>
       <PackagePath>\</PackagePath>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ttsExec.exe" copyToOutput="true">
-      <IncludeInPackage>true</IncludeInPackage>
-      <CopyToOutput>true</CopyToOutput>
-      <BuildAction>Content</BuildAction>
-      <copyToOutput>true</copyToOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="refresh.png" copyToOutput="true">
-      <IncludeInPackage>true</IncludeInPackage>
-      <CopyToOutput>true</CopyToOutput>
-      <BuildAction>Content</BuildAction>
-      <copyToOutput>true</copyToOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="audio.png" copyToOutput="true">
-      <IncludeInPackage>true</IncludeInPackage>
-      <CopyToOutput>true</CopyToOutput>
-      <BuildAction>Content</BuildAction>
-      <copyToOutput>true</copyToOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libmp3lame.32.dll" copyToOutput="true">
-      <IncludeInPackage>true</IncludeInPackage>
-      <CopyToOutput>true</CopyToOutput>
-      <BuildAction>Content</BuildAction>
-      <copyToOutput>true</copyToOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="libmp3lame.64.dll" copyToOutput="true">
-      <IncludeInPackage>true</IncludeInPackage>
-      <CopyToOutput>true</CopyToOutput>
-      <BuildAction>Content</BuildAction>
-      <copyToOutput>true</copyToOutput>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>

@@ -8,6 +8,7 @@ using NAudio.Wave;
 using System;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,8 +25,9 @@ namespace Pigi.Captcha
             
             try
             {
-                var rootDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.
-GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
+                //                var rootDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.
+                //GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
+                var rootDir = Extensions.GetRootPath();
                 await Task.Run(() =>
                 {
                     var process = new System.Diagnostics.Process();
@@ -167,6 +169,13 @@ GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
                 path = string.Join(Path.PathSeparator.ToString(), new string[] { path, binPath });
                 Environment.SetEnvironmentVariable("PATH", path);
             }
+        }
+
+        internal static string GetRootPath()
+        {
+            return System.IO.Path.GetDirectoryName((
+    new System.Uri(Assembly.GetEntryAssembly().CodeBase)
+).AbsolutePath);
         }
     }
 }
