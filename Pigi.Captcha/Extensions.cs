@@ -25,8 +25,6 @@ namespace Pigi.Captcha
             
             try
             {
-                //                var rootDir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.
-                //GetExecutingAssembly().CodeBase).Remove(0, @"file:\".Length);
                 var rootDir = Extensions.GetRootPath();
                 await Task.Run(() =>
                 {
