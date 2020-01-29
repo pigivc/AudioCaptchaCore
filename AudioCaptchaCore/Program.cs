@@ -35,6 +35,6 @@ namespace AudioCaptchaCore
             //}
     //)
             )
-                .UseStartup<Startup>();
+                .UseStartup<Startup>().UseIISIntegration();
     }
 }

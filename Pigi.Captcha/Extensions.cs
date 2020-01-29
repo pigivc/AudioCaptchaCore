@@ -148,7 +148,7 @@ namespace Pigi.Captcha
         "$(\"#img\"+id).attr('src', '"+urlHelper.Content("~/captcha.ashx")+"?id='+id+'&'+Math.random()) }");
 
                 sb.Append("var play = function(id) {var aud = audioDic[id];if (aud == undefined)" +
-                       "aud = new Audio('"+ urlHelper.Content("~/sayit.ashx") + "'+'?id=' + id);" +
+                       "aud = new Audio('"+ urlHelper.Content("~/sayit.ashx") + "'+'?id=' + id+'&'+Math.random());" +
                    "aud.pause();aud.currentTime = 0; aud.play(); audioDic[id] = aud;}");
                 sb.Append("</script>");
             }
