@@ -5,12 +5,12 @@ Audio Captcha for AspNet Core MVC
 Enable Audio feature only if you are gonna host your asp.net core app in windows platform. or disable audio or implement your own tts audio relative to your selected hosting platform!
 
 Sample project included! 
->>>>>>>>and be sure to copy 'ttsExec.exe' and 'libmp3lame.64.dll' 'libmp3lame.32.dll' in bin directory of main project<<<<<<<<<
+>>>>>>>>and be sure to copy 'ttsExec.exe' and 'libmp3lame.64.dll' 'libmp3lame.32.dll' (Included in nuget package) in bin directory of main project<<<<<<<<<
 <h1>Instructions</h1>
 
 1. Add a <pre>Pigi.Captcha.dll</pre> reference to your project.
 or Install via Nuget Package Manager:
-<pre>Install-Package Pigi.Captcha -Version 1.0.3</pre>
+<pre>Install-Package Pigi.Captcha -Version 1.0.7</pre>
 
 2. In startup.cs file or your asp.net core project add <pre>@using Pigi.Captcha</pre> at the top.
 
