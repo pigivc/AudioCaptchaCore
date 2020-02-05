@@ -31,7 +31,7 @@ or
 8. Then validate captcha in code like this:
 
       <pre>
-[HttpPost]<br/>
+[HttpPost]&lt;br/&gt;
         public IActionResult Index(string c1)<br/>
         {<br/>
             var isCaptcha1Valid = CaptchaManager.ValidateCurrentCaptcha("c1", c1);
