@@ -33,7 +33,7 @@ or
       <pre>
 [HttpPost]<br/>
         public IActionResult Index(string c1)<br/>
-        {
+        {<br/>
             var isCaptcha1Valid = CaptchaManager.ValidateCurrentCaptcha("c1", c1);
 
             ViewBag.c1 = isCaptcha1Valid;
