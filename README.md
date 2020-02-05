@@ -28,6 +28,19 @@ or
 <pre>&lt;captcha for-id="c2" for-textLength="9" for-showInput="false" for-textStyle="TextStyle.Numeric"&gt;&lt;/captcha&gt;</pre>
 7. You can configure other settings.
 
+8. Then validate captcha in code like this:
+
+      <pre>
+[HttpPost]
+        public IActionResult Index(string c1)
+        {
+            var isCaptcha1Valid = CaptchaManager.ValidateCurrentCaptcha("c1", c1);
+
+            ViewBag.c1 = isCaptcha1Valid;
+            return View();
+        }
+</pre>
+
 <h1>Live Demo</h1>
 
 <a href="http://captcha.pigivc.ir" target="_blank" >Demo</a>
