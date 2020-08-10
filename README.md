@@ -30,7 +30,8 @@ or
 
 8. Then validate captcha in code like this:
 
-      ```c
+<pre>
+     
 [HttpPost]<br/>
         public IActionResult Index(string c1)<br/>
         {<br/>
@@ -39,8 +40,8 @@ or
             ViewBag.c1 = isCaptcha1Valid;
             return View();
         }
-```
 
+</pre>
 <h1>Live Demo</h1>
 
 <a href="http://captcha.pigivc.ir" target="_blank" >Demo</a>
