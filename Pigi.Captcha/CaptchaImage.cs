@@ -30,7 +30,7 @@ namespace Pigi.Captcha
                     for (int i = 0; i < 10; i++)
                     {
                         var s = r.Next(10, 15);
-                        gr.DrawEllipse(new Pen(Color.LightGreen, 2), r.Next(5, wid), r.Next(5, hgt), s, s);
+                        gr.DrawEllipse(new Pen(Color.SandyBrown, 2), r.Next(5, wid), r.Next(5, hgt), s, s);
                     }
 
                 // See how much room is available for each character.
@@ -62,7 +62,7 @@ namespace Pigi.Captcha
                         points.Add(new PointF(x, y));
                     }
 
-                    gr.DrawCurve(new Pen(Color.LightBlue, 2), points.ToArray());
+                    gr.DrawCurve(new Pen(Color.LightGray, 3), points.ToArray());
                 }
             }
 
@@ -127,7 +127,7 @@ namespace Pigi.Captcha
                     gr.TranslateTransform(dx, dy, MatrixOrder.Append);
 
                     // Draw the text.
-                    gr.FillPath(Brushes.Blue, graphics_path);
+                    gr.FillPath(Brushes.Gray, graphics_path);
                     gr.ResetTransform();
                 }
             }
